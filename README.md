@@ -17,7 +17,8 @@ Device Box (will use Gateway Box for internet routing)
 cd device
 vagrant up
 sudo su -
-route add default gw <ip of gateway box> eth1 #
+route add default gw 192.168.0.27 eth1 #In this scenario device had 192.168.0.28 and gateway .27
+route del default gw 10.0.2.2
 
 ```
 
