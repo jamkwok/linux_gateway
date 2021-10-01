@@ -1,0 +1,29 @@
+# encoding: utf-8
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Box / OS
+VAGRANT_BOX = 'hashicorp/bionic64'
+VM_NAME = 'VmDevice'
+
+Vagrant.configure(2) do |config|
+  config.vm.network "public_network", bridge: "en0: Wi-Fi (Wireless)"
+  # Vagrant box from Hashicorp
+  config.vm.box = VAGRANT_BOX
+  # Actual machine name
+  config.vm.hostname = VM_NAME
+  # Set VM name in Virtualbox
+  config.vm.provider "virtualbox" do |v|
+    v.name = VM_NAME
+    v.memory = 512
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    # bash script
+    apt-get update
+    apt-get install -y tcpdump
+
+    curl -s https://install.zerotier.com | bash
+
+  SHELL
+end
