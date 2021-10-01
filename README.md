@@ -1,5 +1,26 @@
 # linux_gateway
 
+## Instructions
+Gateway Box
+```shell
+cd gateway
+vagrant up
+vagrant ssh
+sudo su -
+# change default route to be that of eth1 via public network (your own network and not internal vagrant network)
+route add default gw 192.168.0.1 eth1 # assumes your public internet rotue is 192.168.0.1
+route del default gw 10.0.2.2 # remove vagrant default route
+
+```
+Device Box (will use Gateway Box for internet routing)
+```shell
+cd device
+vagrant up
+sudo su -
+route add default gw <ip of gateway box> eth1 #
+
+```
+
 Monitor gateway
 ```
 # http
